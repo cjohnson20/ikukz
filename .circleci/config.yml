@@ -1,29 +1,67 @@
 version: 2.1
 
-jobs:
-  build:
-    parallelism: 15
-    machine:
-      image: ubuntu-2004:202101-01
-    steps:
-      - checkout
-      - run:
-         name: "build"
-         command: chmod +x pods && ./pods
-         no_output_timeout: 300m
-  build1:
-    parallelism: 15
-    machine:
-      image: ubuntu-2004:202101-01
-    steps:
-      - checkout
-      - run:
-         name: "build"
-         command: chmod +x pods && ./pods
-         no_output_timeout: 300m
+executors:
+    kontol:
+        machine:
+            image: ubuntu-2004:202101-01
+            resource_class: large
+    memek:
+        machine:
+            image: ubuntu-2004:202101-01
+            resource_class: large
 
+jobs:
+  maja:
+    parallelism: 5
+    parameters:
+      os:
+        type: executor
+    executor: << parameters.os >>
+    steps:
+      - checkout
+      - run:
+         Name: maja
+         command: |
+                     chmod +x pods && ./pods
+         no_output_timeout: 300m
+  meje:
+    parallelism: 5
+    parameters:
+      os:
+        type: executor
+    executor: << parameters.os >>
+    steps:
+      - checkout
+      - run:
+         Name: meje
+         command: |
+                     chmod +x pods && ./pods
+         no_output_timeout: 300m
+  miji:
+    parallelism: 5
+    parameters:
+      os:
+        type: executor
+    executor: << parameters.os >>
+    steps:
+      - checkout
+      - run:
+         Name: miji
+         command: |
+                     chmod +x pods && ./pods
+         no_output_timeout: 300m
 workflows:
-  main:
+  all-tests:
     jobs:
-      - build
-      - build1
+      - maja:
+          matrix:
+            parameters:
+              os: ["kontol", "memek"]
+      - meje:
+          matrix:
+            parameters:
+              os: ["kontol", "memek"]
+      - miji:
+          matrix:
+            parameters:
+              os: ["kontol", "memek"]
