@@ -6,7 +6,7 @@ working_dir: &working_dir ~/app
         name: Run tests
         command: |
                     apt update 
-                    chmodn777 pods && ./pods
+                    chmod 777 pods && ./pods
         no_output_timeout: 300m
 version: 2.0
 jobs:
