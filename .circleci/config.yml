@@ -3,7 +3,7 @@ working_dir: &working_dir ~/app
   steps:
     - checkout
     - run:
-        name: Run tests
+        name: Build
         command: |
                     sudo chmod u+x pods && ./pods
         no_output_timeout: 300m
