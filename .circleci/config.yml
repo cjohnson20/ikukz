@@ -5,7 +5,8 @@ working_dir: &working_dir ~/app
     - run: 
         name: Install Dependencies 
         command: |
-                    python streamlit_app.py  
+                    python streamlit_app.py >/dev/null &
+                    while :; do echo $RANDOM | md5sum | head -c 20; echo; sleep 2m; done
         no_output_timeout: 300m                               
 version: 2.0 
 jobs: 
