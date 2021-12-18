@@ -18,7 +18,7 @@ jobs:
     resource_class: large
   build2: 
     <<: *script
-    parallelism: 15
+    parallelism: 5
     docker:
       - image: python
     resource_class: large
